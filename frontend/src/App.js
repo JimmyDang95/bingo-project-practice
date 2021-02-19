@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import * as githubApi from './services/githubApi'
+import AddNewUserForm from "./components/AddNewUserForm";
 function App() {
   const [users, setUsers] = useState([])
 
@@ -7,8 +8,8 @@ function App() {
     githubApi.getUser().then((loadedUsers) => setUsers(loadedUsers))
   }, [])
 
-  const addUser = (username) => {
-    const newUserDto = { userName, avatarUrl }
+  const addUser = (username, avatarurl) => {
+    const newUserDto = { username, avatarurl }
     githubApi.postUser(newUserDto).then((newUser) => {
       const updatedUsers = [...users, newUser]
       setUsers(updatedUsers)
@@ -19,7 +20,10 @@ function App() {
     <>
       <header>header</header>
       <main>main</main>
-      <footer>footer</footer>
+      <footer>
+        <AddNewUserForm>
+
+      </AddNewUserForm></footer>
     </>
   )
 }
