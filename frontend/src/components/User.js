@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 345,
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: 200,
+        // paddingTop: '56.25%', // 16:9
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -36,7 +36,7 @@ export default function User({user, detailView}){
             <CardMedia
                 className={classes.media}
                 image={`${user.avatar}`}
-                title="Paella dish"
+                title="Avatar"
             />
 
                 <CardContent>
@@ -50,6 +50,7 @@ export default function User({user, detailView}){
                     <Button color="primary" component={Link} to={`/user/${user.name}`} >
                         Details
                     </Button>
+                    <Button color="secondary">Delete</Button>
                 </CardActions>
                 )}
 

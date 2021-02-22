@@ -4,6 +4,7 @@ import AddNewUserForm from "./components/AddNewUserForm";
 import UserBoard from "./components/UserBoard";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import UserDetails from "./components/UserDetails";
+import AppHeader from "./components/AppHeader";
 
 
 function App() {
@@ -22,25 +23,14 @@ function App() {
   }
 
   return (
-/*    <>
-      <header>header</header>
-      <main>
-          <UserBoard users={users}/>
-      </main>
-      <footer>
-
-      </AddNewUserForm>
-      </footer>
-    </>*/
     <Router>
         <Switch>
             <Route exact path="/">
-                    <header>
+                    <AppHeader/>
                     <UserBoard
                         users={users}
                     />
                     <AddNewUserForm onAdd={addUser}/>
-                    </header>
             </Route>
             <Route path="/user/:name">
                 <UserDetails />

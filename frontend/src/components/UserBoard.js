@@ -1,9 +1,10 @@
 import User from './User'
+import styled from 'styled-components/macro'
 
 
 export default function UserBoard({users}){
     return (
-        <section>
+        <Section>
             <ul>
                 {users.map((user) => (
                 <li key={user.name}>
@@ -11,7 +12,19 @@ export default function UserBoard({users}){
                 </li>
                     ))}
             </ul>
-        </section>
+        </Section>
     )
 
 }
+
+const Section = styled.section`
+  padding: 0 16px;
+  margin: 10px 10px 5px 5px;
+  box-shadow: 5px 5px 5px grey;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background: white;
+  color: black;
+`
+
