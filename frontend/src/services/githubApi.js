@@ -7,4 +7,4 @@ export const getUsers = () =>
   axios.get('api/user').then((response) => response.data)
 
 export const getUser = (name) =>
-    axios.get('/api/user/${name}').then((response) => response.data)
+    axios.get(`/api/user/${name}`).then((response) => response.data)
