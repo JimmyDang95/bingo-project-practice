@@ -1,5 +1,6 @@
 import User from './User'
 
+
 export default function UserBoard({users}){
     return (
         <section>
