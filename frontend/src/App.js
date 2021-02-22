@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import * as githubApi from './services/githubApi'
 import AddNewUserForm from "./components/AddNewUserForm";
+import UserBoard from "./components/UserBoard";
+
 function App() {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    githubApi.getUser().then((loadedUsers) => setUsers(loadedUsers))
+    githubApi.getUsers().then((loadedUsers) => setUsers(loadedUsers))
   }, [])
 
-  const addUser = (username, avatarurl) => {
-    const newUserDto = { username, avatarurl }
+  const addUser = (name) => {
+    const newUserDto = { name }
     githubApi.postUser(newUserDto).then((newUser) => {
       const updatedUsers = [...users, newUser]
       setUsers(updatedUsers)
@@ -19,11 +21,14 @@ function App() {
   return (
     <>
       <header>header</header>
-      <main>main</main>
+      <main>
+          <UserBoard users={users}/>
+      </main>
       <footer>
-        <AddNewUserForm>
+        <AddNewUserForm onAdd={addUser}>
 
-      </AddNewUserForm></footer>
+      </AddNewUserForm>
+      </footer>
     </>
   )
 }
