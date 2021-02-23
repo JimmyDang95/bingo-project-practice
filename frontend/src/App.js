@@ -1,7 +1,7 @@
 import {Component, useEffect, useState} from 'react'
 import * as githubApi from './services/githubApi'
 import AddNewUserForm from "./components/AddNewUserForm";
-import UserBoard from "./components/UserBoard";
+import UserList from "./components/UserList";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import UserDetails from "./components/UserDetails";
 import AppHeader from "./components/AppHeader";
@@ -27,7 +27,7 @@ function App() {
         <Switch>
             <Route exact path="/">
                     <AppHeader/>
-                    <UserBoard
+                    <UserList
                         users={users}
                     />
                     <AddNewUserForm onAdd={addUser}/>

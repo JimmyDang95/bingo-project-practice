@@ -2,7 +2,7 @@ import User from './User'
 import styled from 'styled-components/macro'
 
 
-export default function UserBoard({users}){
+export default function UserList({users}){
     return (
         <Section>
             <ul>
