@@ -1,6 +1,6 @@
 package de.neuefische.githubbingomaster.service;
 
-import de.neuefische.githubbingomaster.db.UserDb;
+import de.neuefische.githubbingomaster.db.UserMongoDb;
 import de.neuefische.githubbingomaster.githubapi.model.GitHubProfile;
 import de.neuefische.githubbingomaster.githubapi.service.GitHubApiService;
 import de.neuefische.githubbingomaster.model.User;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
 
     private final GitHubApiService gitHubApiService = mock(GitHubApiService.class);
-    private final UserDb userDb = mock(UserDb.class);
+    private final UserMongoDb userDb = mock(UserMongoDb.class);
     private final UserService userService = new UserService(gitHubApiService, userDb);
 
     @Test
@@ -37,10 +37,10 @@ class UserServiceTest {
         when(gitHubApiService.getUserprofile(gitHubUser))
                 .thenReturn(Optional.of(gitHubProfile));
 
-        when(userDb.hasUser(gitHubUser)).thenReturn(false);
+        when(userDb.existsById(gitHubUser)).thenReturn(false);
 
         User mockUser = User.builder().name(gitHubUser).avatar(avatarUrl).build();
-        when(userDb.addUser(mockUser))
+        when(userDb.save(mockUser))
                 .thenReturn(mockUser);
 
         // WHEN
@@ -49,7 +49,7 @@ class UserServiceTest {
         // THEN
         User expectedUser = User.builder().name(gitHubUser).avatar(avatarUrl).build();
         assertThat(actual, is(expectedUser));
-        verify(userDb).addUser(expectedUser);
+        verify(userDb).save(expectedUser);
     }
 
     @Test
@@ -65,8 +65,8 @@ class UserServiceTest {
         assertThrows(ResponseStatusException.class, () -> userService.addUser(gitHubUser));
 
         // THEN
-        verify(userDb, never()).addUser(any());
-        verify(userDb, never()).hasUser(any());
+        verify(userDb, never()).save(any());
+        verify(userDb, never()).existsById(any());
     }
 
     @Test
@@ -82,13 +82,13 @@ class UserServiceTest {
         when(gitHubApiService.getUserprofile(gitHubUser))
                 .thenReturn(Optional.of(gitHubProfile));
 
-        when(userDb.hasUser(gitHubUser)).thenReturn(true);
+        when(userDb.existsById(gitHubUser)).thenReturn(true);
 
         // WHEN
         assertThrows(ResponseStatusException.class, () -> userService.addUser(gitHubUser));
 
         // THEN
-        verify(userDb, never()).addUser(any());
+        verify(userDb, never()).existsById(any());
     }
 
   /*  @Test
@@ -126,7 +126,8 @@ class UserServiceTest {
     public void getNotExistingUser(){
         //GIVEN
         String username = "notExistingUserName";
-        when(userDb.findByUsername(username)).thenReturn(Optional.empty());
+        when(gitHubApiService.getUserRepos(username)).thenReturn(new ArrayList<>());
+        when(userDb.existsById(username)).thenReturn(false);
 
         //WHEN
         Optional<User> userByUsername = userService.getUserByUsername(username);

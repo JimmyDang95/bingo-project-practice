@@ -1,7 +1,8 @@
 package de.neuefische.githubbingomaster.controller;
 
+import de.neuefische.githubbingomaster.githubapi.model.GitHubRepo;
 import de.neuefische.githubbingomaster.model.AddUserDto;
-import de.neuefische.githubbingomaster.model.Repo;
+import de.neuefische.githubbingomaster.model.UserRepo;
 import de.neuefische.githubbingomaster.model.User;
 import de.neuefische.githubbingomaster.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,11 @@ public class UserController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
     }
 
-   /* @GetMapping("{username}/repos")
-    public List<Repo> listRepos(@PathVariable String name){
-        return userService.listRepos(name);
+    @GetMapping("{username}/repos")
+    public List<UserRepo> getRepositories(@PathVariable String username){
+        return userService.getRepositories(username)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, username + "does not exist in " +
+                "database"));
     }
-*/
+
 }
