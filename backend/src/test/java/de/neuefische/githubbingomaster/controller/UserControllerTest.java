@@ -106,7 +106,7 @@ class UserControllerTest {
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
     }
 
-    @Test
+   /* @Test
     @DisplayName("Get user should return a list of all users")
     public void getAllUsers() {
         //GIVEN
@@ -148,5 +148,5 @@ class UserControllerTest {
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
-    }
+    }*/
 }

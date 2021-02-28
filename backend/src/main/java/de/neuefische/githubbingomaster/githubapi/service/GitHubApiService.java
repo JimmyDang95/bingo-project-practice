@@ -1,6 +1,7 @@
 package de.neuefische.githubbingomaster.githubapi.service;
 
 import de.neuefische.githubbingomaster.githubapi.model.GitHubProfile;
+import de.neuefische.githubbingomaster.model.Repo;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -35,5 +38,15 @@ public class GitHubApiService {
             return Optional.empty();
         }
     }
+    /*public Optional<Repo> getRepoUrl(String loginName){
+        String url = baseUrl + "/" + loginName + "/repos";
+        try{
+            ResponseEntity<Repo> response = restTemplate.getForEntity(url, Repo[].class);
 
-}
+            return Array.asList(response.getBody());
+        }catch(RestClientException e){
+            log.warn(e.getMessage());
+            return ArrayList();
+        }*/
+    }
+

@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.contains;
 
 class UserDbTest {
 
-    private final UserDb userDb = new UserDb();
+   /* private final UserDb userDb = new UserDb();
 
     @Test
     @DisplayName("Add should insert users into list")
@@ -60,6 +60,6 @@ class UserDbTest {
         //THEN
         assertThat(userResponse.isEmpty(), is(true));
 
-    }
+    }*/
 
 }

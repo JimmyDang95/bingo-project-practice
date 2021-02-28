@@ -15,5 +15,4 @@ public class GitHubProfile {
     private String login;
     @JsonProperty("avatar_url")
     private String avatarUrl;
-
 }

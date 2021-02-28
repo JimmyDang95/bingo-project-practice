@@ -91,7 +91,7 @@ class UserServiceTest {
         verify(userDb, never()).addUser(any());
     }
 
-    @Test
+  /*  @Test
     @DisplayName("List users should return list from db")
     public void listUsers(){
         //GIVEN
@@ -119,7 +119,7 @@ class UserServiceTest {
 
         //THEN
         assertThat(userByUsername.get(), is(new User(username, "someavatar")));
-    }
+    }*/
 
     @Test
     @DisplayName("getUserByUsername should return empty user from Db")
